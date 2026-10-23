@@ -1,0 +1,10 @@
+$ git status --short
+?? .editorconfig
+?? .gitignore
+?? .prettierignore
+?? .prettierrc.json
+?? README.md
+?? eslint.config.js
+?? evidencias/
+?? package.json
+
