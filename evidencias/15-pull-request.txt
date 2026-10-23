@@ -1,0 +1,61 @@
+$ git log --oneline main..feature/crud-pessoas | wc -l
+17
+
+$ git diff --stat main..feature/crud-pessoas | tail -40
+ README.md                                   |  91 +++++++++-
+ docs/PULL_REQUEST.md                        |  37 +++++
+ eslint.config.js                            |   1 +
+ evidencias/01-versionamento.txt             |  10 --
+ evidencias/03-tdd-erros.txt                 |  35 ++++
+ evidencias/04-tdd-idade.txt                 |  54 ++++++
+ evidencias/05-tdd-cpf.txt                   |  24 +++
+ evidencias/06-tdd-repositorio-servico.txt   |  26 +++
+ evidencias/07-tdd-integracao-api.txt        |  60 +++++++
+ evidencias/08-tdd-frontend.txt              |  13 ++
+ evidencias/09-analise-estatica.txt          |  24 +++
+ evidencias/10-formatacao.txt                |  62 +++++++
+ evidencias/11-testes-unitarios.txt          | 136 +++++++++++++++
+ evidencias/12-testes-integracao.txt         |  55 ++++++
+ evidencias/13-cobertura.txt                 |  26 +++
+ evidencias/14-docker-imagem.txt             |  62 +++++++
+ public/app.js                               | 205 +++++++++++++++++++++++
+ public/estilo.css                           | 249 ++++++++++++++++++++++++++++
+ public/index.html                           |  91 ++++++++++
+ public/mascara.js                           |  34 ++++
+ src/dominio/cpf.js                          |  43 +++++
+ src/dominio/idade.js                        |  82 +++++++++
+ src/erros.js                                |  26 +++
+ src/http/aplicacao.js                       | 112 +++++++++++++
+ src/http/arquivosEstaticos.js               |  40 +++++
+ src/http/corpo.js                           |  30 ++++
+ src/http/erroHttp.js                        |   9 +
+ src/repositorio/repositorioMemoria.js       |  28 ++++
+ src/servico/servicoPessoas.js               | 105 ++++++++++++
+ src/servidor.js                             |  15 ++
+ tests/helpers/servidorDeTeste.js            |  40 +++++
+ tests/integration/frontend.estatico.test.js |  47 ++++++
+ tests/integration/pessoas.api.test.js       | 194 ++++++++++++++++++++++
+ tests/unit/cpf.test.js                      |  62 +++++++
+ tests/unit/erros.test.js                    |  21 +++
+ tests/unit/idade.test.js                    |  83 ++++++++++
+ tests/unit/mascara.test.js                  |  55 ++++++
+ tests/unit/repositorioMemoria.test.js       |  58 +++++++
+ tests/unit/servicoPessoas.test.js           | 192 +++++++++++++++++++++
+ 42 files changed, 2606 insertions(+), 12 deletions(-)
+
+$ git log --format='%h %s' main..feature/crud-pessoas | grep -E 'RED|GREEN'
+e9a2882 feat(frontend): [GREEN] mascararCpf, dataParaBr e textoIdade
+16dd88a test(frontend): [RED] máscara de CPF e formatadores usados pela interface
+fc64608 feat(api): [GREEN] servidor HTTP com rotas REST, tratamento de erros e arquivos estáticos
+2907965 test(api): [RED] testes de integração da API REST e dos arquivos estáticos
+c059fe6 feat(servico): [GREEN] ServicoPessoas com validações e idade calculada
+8e24d71 test(servico): [RED] regras do CRUD (criar, listar, buscar, atualizar, remover)
+0721c91 feat(repositorio): [GREEN] RepositorioMemoria
+3379852 test(repositorio): [RED] repositório em memória
+b0dee18 feat(cpf): [GREEN] cpfValido, apenasDigitos e formatarCpf
+e6beaf0 test(cpf): [RED] validação por dígitos verificadores, normalização e máscara
+988b660 feat(idade): [GREEN] calcularIdade e validarDataNascimento (inclui 29/02)
+6033a78 test(idade): [RED] cálculo de idade e validação da data de nascimento
+6b47d6c feat(erros): [GREEN] ErroValidacao, ErroNaoEncontrado e ErroConflito
+d6a9860 test(erros): [RED] erros de domínio com status HTTP
+
