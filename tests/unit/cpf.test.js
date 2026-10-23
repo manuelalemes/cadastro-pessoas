@@ -35,7 +35,15 @@ describe('cpfValido', () => {
     });
   }
 
-  const malFormados = ['', '123', '1234567890', '123456789012', 'abcdefghijk', null, 12345678909];
+  const malFormados = [
+    '',
+    '123',
+    '1234567890',
+    '123456789012',
+    'abcdefghijk',
+    null,
+    12345678909,
+  ];
   for (const cpf of malFormados) {
     it(`rejeita formato inválido (${JSON.stringify(cpf)})`, () => {
       assert.equal(cpfValido(cpf), false);
