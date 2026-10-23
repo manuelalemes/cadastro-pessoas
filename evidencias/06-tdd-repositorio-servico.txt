@@ -11,3 +11,16 @@ $ npm run test:unit -- 2>&1 | grep -E '^ℹ (tests|pass|fail)'
 ℹ pass 58
 ℹ fail 0
 
+$ npm run test:unit -- 2>&1 | grep -E 'Cannot find|fail|tests' | head -6
+> node --test --test-reporter=spec "tests/unit/**/*.test.js"
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/claude/cadastro-pessoas/src/servico/servicoPessoas.js' imported from /home/claude/cadastro-pessoas/tests/unit/servicoPessoas.test.js
+✖ tests/unit/servicoPessoas.test.js (46.184554ms)
+ℹ tests 59
+ℹ fail 1
+✖ failing tests:
+
+$ npm run test:unit -- 2>&1 | grep -E '^ℹ (tests|pass|fail)'
+ℹ tests 78
+ℹ pass 78
+ℹ fail 0
+

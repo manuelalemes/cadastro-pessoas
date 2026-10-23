@@ -53,7 +53,12 @@ describe('ServicoPessoas', () => {
 
     it('rejeita CPF inválido', () => {
       assert.throws(
-        () => servico.criar({ cpf: '12345678900', nome: 'Ana', dataNascimento: '2000-05-10' }),
+        () =>
+          servico.criar({
+            cpf: '12345678900',
+            nome: 'Ana',
+            dataNascimento: '2000-05-10',
+          }),
         { name: 'ErroValidacao', message: 'CPF inválido' },
       );
     });
@@ -84,7 +89,10 @@ describe('ServicoPessoas', () => {
     it('rejeita CPF duplicado com ErroConflito', () => {
       const dados = { cpf: CPF_ANA, nome: 'Ana', dataNascimento: '2000-05-10' };
       servico.criar(dados);
-      assert.throws(() => servico.criar({ ...dados, cpf: '529.982.247-25' }), ErroConflito);
+      assert.throws(
+        () => servico.criar({ ...dados, cpf: '529.982.247-25' }),
+        ErroConflito,
+      );
     });
   });
 
@@ -158,7 +166,10 @@ describe('ServicoPessoas', () => {
 
     it('valida os novos dados e não altera o registro em caso de erro', () => {
       assert.throws(() => servico.atualizar(CPF_ANA, { nome: '' }), ErroValidacao);
-      assert.throws(() => servico.atualizar(CPF_ANA, { dataNascimento: '2999-01-01' }), ErroValidacao);
+      assert.throws(
+        () => servico.atualizar(CPF_ANA, { dataNascimento: '2999-01-01' }),
+        ErroValidacao,
+      );
       assert.equal(servico.buscar(CPF_ANA).nome, 'Ana');
     });
 
