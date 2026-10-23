@@ -1,0 +1,55 @@
+$ npm run test:integration 2>&1 | grep -vE '^$'
+> cadastro-pessoas@1.0.0 test:integration
+> node --test --test-reporter=spec "tests/integration/**/*.test.js"
+▶ Arquivos estáticos do frontend (integração)
+  ✔ serve a página inicial em "/" (23.681082ms)
+  ✔ serve o CSS com o content-type correto (5.10616ms)
+  ✔ serve os módulos JavaScript do frontend (22.99312ms)
+  ✔ bloqueia tentativa de sair da pasta public (path traversal) (7.220655ms)
+  ✔ responde 404 para arquivo inexistente (4.410734ms)
+✔ Arquivos estáticos do frontend (integração) (73.39713ms)
+▶ API /pessoas (integração)
+  ✔ GET /saude responde ok (40.2777ms)
+  ▶ POST /pessoas
+    ✔ cria a pessoa e devolve 201 com a idade (19.047338ms)
+    ✔ informa a URL do novo recurso no cabeçalho Location (13.901028ms)
+    ✔ responde 400 para CPF inválido (12.012975ms)
+    ✔ responde 400 para data futura (9.854306ms)
+    ✔ responde 409 para CPF repetido (8.109619ms)
+    ✔ responde 400 para JSON malformado (10.077633ms)
+    ✔ responde 400 quando o corpo não é um objeto (5.001306ms)
+    ✔ responde 413 para corpo grande demais (13.099201ms)
+  ✔ POST /pessoas (92.724714ms)
+  ▶ GET /pessoas
+    ✔ lista vazia no início (14.767813ms)
+    ✔ lista as pessoas cadastradas em ordem de nome (18.64819ms)
+  ✔ GET /pessoas (33.94578ms)
+  ▶ GET /pessoas/:cpf
+    ✔ devolve a pessoa pelo CPF (10.710951ms)
+    ✔ responde 404 quando não existe (3.981918ms)
+    ✔ responde 400 para CPF malformado (3.044848ms)
+  ✔ GET /pessoas/:cpf (18.082158ms)
+  ▶ PUT /pessoas/:cpf
+    ✔ atualiza nome e data e recalcula a idade (6.473497ms)
+    ✔ persiste a alteração (9.108265ms)
+    ✔ responde 400 ao tentar trocar o CPF (4.822834ms)
+    ✔ responde 404 para pessoa inexistente (3.807563ms)
+  ✔ PUT /pessoas/:cpf (24.605785ms)
+  ▶ DELETE /pessoas/:cpf
+    ✔ remove e responde 204 sem corpo (7.016999ms)
+    ✔ responde 404 para pessoa inexistente (3.67094ms)
+  ✔ DELETE /pessoas/:cpf (10.97662ms)
+  ▶ roteamento
+    ✔ responde 404 em JSON para rotas desconhecidas (3.841166ms)
+    ✔ responde 405 para método não suportado em /pessoas (2.925714ms)
+  ✔ roteamento (6.958452ms)
+✔ API /pessoas (integração) (244.502353ms)
+ℹ tests 27
+ℹ suites 8
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 547.481035
+

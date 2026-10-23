@@ -1,0 +1,62 @@
+$ cat src/exemplo-mal-formatado.js
+const   a = {x:1,
+ y:  2}
+export default   a
+
+$ npm run format:check; echo "codigo de saida: $?"
+
+> cadastro-pessoas@1.0.0 format:check
+> prettier --check .
+
+Checking formatting...
+[warn] src/exemplo-mal-formatado.js
+[warn] Code style issues found in the above file. Run Prettier with --write to fix.
+codigo de saida: 1
+
+$ npm run format
+
+> cadastro-pessoas@1.0.0 format
+> prettier --write .
+
+.prettierrc.json 26ms (unchanged)
+eslint.config.js 25ms (unchanged)
+package.json 3ms (unchanged)
+public/app.js 55ms (unchanged)
+public/estilo.css 55ms (unchanged)
+public/index.html 64ms (unchanged)
+public/mascara.js 9ms (unchanged)
+README.md 19ms (unchanged)
+src/dominio/cpf.js 11ms (unchanged)
+src/dominio/idade.js 17ms (unchanged)
+src/erros.js 8ms (unchanged)
+src/exemplo-mal-formatado.js 2ms
+src/http/aplicacao.js 26ms (unchanged)
+src/http/arquivosEstaticos.js 5ms (unchanged)
+src/http/corpo.js 9ms (unchanged)
+src/http/erroHttp.js 2ms (unchanged)
+src/repositorio/repositorioMemoria.js 6ms (unchanged)
+src/servico/servicoPessoas.js 21ms (unchanged)
+src/servidor.js 3ms (unchanged)
+tests/helpers/servidorDeTeste.js 5ms (unchanged)
+tests/integration/frontend.estatico.test.js 6ms (unchanged)
+tests/integration/pessoas.api.test.js 28ms (unchanged)
+tests/unit/cpf.test.js 11ms (unchanged)
+tests/unit/erros.test.js 2ms (unchanged)
+tests/unit/idade.test.js 6ms (unchanged)
+tests/unit/mascara.test.js 4ms (unchanged)
+tests/unit/repositorioMemoria.test.js 11ms (unchanged)
+tests/unit/servicoPessoas.test.js 34ms (unchanged)
+
+$ cat src/exemplo-mal-formatado.js
+const a = { x: 1, y: 2 };
+export default a;
+
+$ npm run format:check; echo "codigo de saida: $?"
+
+> cadastro-pessoas@1.0.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+codigo de saida: 0
+

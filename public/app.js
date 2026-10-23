@@ -73,13 +73,15 @@ function criarLinha(pessoa) {
     linha.append(celula);
   }
 
-  const acoes = document.createElement('td');
-  acoes.className = 'acoes';
-  acoes.append(
+  const celulaAcoes = document.createElement('td');
+  const grupo = document.createElement('div');
+  grupo.className = 'acoes';
+  grupo.append(
     criarBotao('Editar', 'neutro', () => iniciarEdicao(pessoa)),
     criarBotao('Excluir', 'perigo', () => excluir(pessoa)),
   );
-  linha.append(acoes);
+  celulaAcoes.append(grupo);
+  linha.append(celulaAcoes);
   return linha;
 }
 

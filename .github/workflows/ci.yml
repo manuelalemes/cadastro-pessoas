@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  qualidade:
+    name: Lint, formatação e testes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar dependências de desenvolvimento
+        run: npm install --no-audit --no-fund
+      - name: Análise estática (ESLint)
+        run: npm run lint
+      - name: Formatação (Prettier)
+        run: npm run format:check
+      - name: Testes unitários
+        run: npm run test:unit
+      - name: Testes de integração
+        run: npm run test:integration
+      - name: Cobertura
+        run: npm run test:coverage
+
+  imagem:
+    name: Imagem Docker
+    runs-on: ubuntu-latest
+    needs: qualidade
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construir imagem
+        run: docker build -t cadastro-pessoas:ci .
+      - name: Subir contêiner e checar /saude
+        run: |
+          docker run -d --name app -p 3000:3000 cadastro-pessoas:ci
+          for i in $(seq 1 15); do
+            curl -fsS http://localhost:3000/saude && exit 0
+            sleep 1
+          done
+          docker logs app
+          exit 1

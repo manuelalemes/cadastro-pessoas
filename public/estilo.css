@@ -222,7 +222,7 @@ th {
   color: var(--texto-suave);
 }
 
-td.acoes {
+td .acoes {
   display: flex;
   gap: 6px;
   justify-content: flex-end;

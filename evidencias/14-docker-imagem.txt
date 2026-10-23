@@ -1,0 +1,62 @@
+$ bash /tmp/claude-0/-home-claude/a3e08102-aa19-54a6-8a35-3c8aa004fcf2/scratchpad/docker.sh
+#0 building with "default" instance using docker driver
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 546B done
+#1 DONE 0.0s
+#2 [internal] load metadata for docker.io/local/node-base:22
+#2 DONE 0.0s
+#3 [internal] load .dockerignore
+#3 transferring context: 122B done
+#3 DONE 0.0s
+#4 [internal] load build context
+#4 transferring context: 29.18kB 0.0s done
+#4 DONE 0.0s
+#5 [1/5] FROM docker.io/local/node-base:22@sha256:b26e970b65086cf556d584ae0cfa2f0cfa4685aa2abb851aa64f7f7e59e9e8bb
+#5 resolve docker.io/local/node-base:22@sha256:b26e970b65086cf556d584ae0cfa2f0cfa4685aa2abb851aa64f7f7e59e9e8bb 0.0s done
+#5 extracting sha256:0c98023dd84e52b2c8291e617a844114e6fd38595a4d2f32de269c47c1a96786
+#5 extracting sha256:0c98023dd84e52b2c8291e617a844114e6fd38595a4d2f32de269c47c1a96786 1.3s done
+#5 DONE 1.3s
+#6 [2/5] WORKDIR /app
+#6 DONE 0.5s
+#7 [3/5] COPY package.json ./
+#7 DONE 0.0s
+#8 [4/5] COPY src ./src
+#8 DONE 0.0s
+#9 [5/5] COPY public ./public
+#9 DONE 0.0s
+#10 exporting to image
+#10 exporting layers 0.1s done
+#10 exporting manifest sha256:81f49c55d417661b3cc98e97245e599a3f61158e644323a21047bba90bbb4843 done
+#10 exporting config sha256:41e78f13445bcd178e44954d874fa543a4ea1284c0006f791e4256ec8901aa3c done
+#10 exporting attestation manifest sha256:59382eced206ec4d38462b6ee80c283df1b5a6ba40574287cd4a72558aa6e91c 0.0s done
+#10 exporting manifest list sha256:f88c4e736ddef6e398842e5be15dac547d1adf631bd4b16d54acc597bdf71597 done
+#10 naming to docker.io/library/cadastro-pessoas:1.0 done
+#10 unpacking to docker.io/library/cadastro-pessoas:1.0 0.0s done
+#10 DONE 0.2s
+IMAGE                  ID             DISK USAGE   CONTENT SIZE   EXTRA
+cadastro-pessoas:1.0   f88c4e736dde        190MB           51MB        
+5e00f2e8e80d3a0c40df94eb0a425069b6e0689e908634700ac9f448f1e73d28
+NAMES          IMAGE                  STATUS                            PORTS
+cadastro-app   cadastro-pessoas:1.0   Up 2 seconds (health: starting)   0.0.0.0:3200->3000/tcp
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+Date: Fri, 23 Oct 2026 19:37:08 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"cpf":"52998224725","nome":"Ana Souza","dataNascimento":"2000-05-10","idade":26}
+[{"cpf":"52998224725","nome":"Ana Souza","dataNascimento":"2000-05-10","idade":26}]
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Pessoas</title>
+Servidor rodando em http://localhost:3000
+
+$ docker ps --filter name=cadastro-app --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}'
+NAMES          IMAGE                  STATUS
+cadastro-app   cadastro-pessoas:1.0   Up 32 seconds (healthy)
+

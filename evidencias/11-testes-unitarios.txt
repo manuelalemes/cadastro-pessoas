@@ -1,0 +1,136 @@
+$ npm run test:unit 2>&1 | grep -vE '^$'
+> cadastro-pessoas@1.0.0 test:unit
+> node --test --test-reporter=spec "tests/unit/**/*.test.js"
+▶ apenasDigitos
+  ✔ remove pontos, traço e espaços (0.722082ms)
+  ✔ devolve string vazia para valores que não são texto (0.135736ms)
+✔ apenasDigitos (1.819915ms)
+▶ cpfValido
+  ✔ aceita 52998224725 (0.652799ms)
+  ✔ aceita 529.982.247-25 (0.140629ms)
+  ✔ aceita 11144477735 (0.196382ms)
+  ✔ aceita 111.444.777-35 (0.106023ms)
+  ✔ rejeita primeiro dígito verificador incorreto (0.274146ms)
+  ✔ rejeita segundo dígito verificador incorreto (0.259356ms)
+  ✔ rejeita sequência repetida 00000000000 (0.296776ms)
+  ✔ rejeita sequência repetida 11111111111 (0.242946ms)
+  ✔ rejeita sequência repetida 22222222222 (0.085043ms)
+  ✔ rejeita sequência repetida 33333333333 (0.061282ms)
+  ✔ rejeita sequência repetida 44444444444 (0.052057ms)
+  ✔ rejeita sequência repetida 55555555555 (0.060652ms)
+  ✔ rejeita sequência repetida 66666666666 (0.049113ms)
+  ✔ rejeita sequência repetida 77777777777 (0.050872ms)
+  ✔ rejeita sequência repetida 88888888888 (1.095712ms)
+  ✔ rejeita sequência repetida 99999999999 (0.137975ms)
+  ✔ rejeita formato inválido ("") (0.092638ms)
+  ✔ rejeita formato inválido ("123") (0.046926ms)
+  ✔ rejeita formato inválido ("1234567890") (0.042835ms)
+  ✔ rejeita formato inválido ("123456789012") (0.104263ms)
+  ✔ rejeita formato inválido ("abcdefghijk") (0.048563ms)
+  ✔ rejeita formato inválido (null) (0.041424ms)
+  ✔ rejeita formato inválido (12345678909) (0.039468ms)
+✔ cpfValido (4.940202ms)
+▶ formatarCpf
+  ✔ aplica a máscara 000.000.000-00 (0.194969ms)
+  ✔ mantém o valor original quando não há 11 dígitos (0.073866ms)
+✔ formatarCpf (0.359868ms)
+▶ erros de domínio
+  ✔ ErroValidacao carrega mensagem e status 400 (0.902676ms)
+  ✔ ErroNaoEncontrado usa status 404 (0.166478ms)
+  ✔ ErroConflito usa status 409 (0.282817ms)
+✔ erros de domínio (3.098515ms)
+▶ calcularIdade
+  ✔ conta anos completos quando o aniversário já passou no ano (1.9429ms)
+  ✔ desconta um ano quando o aniversário ainda não chegou (0.243233ms)
+  ✔ considera o próprio dia do aniversário como ano completo (0.257118ms)
+  ✔ considera o dia anterior ao aniversário como ano incompleto (0.382917ms)
+  ✔ retorna 0 para quem nasceu há menos de um ano (0.462971ms)
+  ✔ retorna 0 para quem nasceu hoje (0.390644ms)
+  ✔ completa 29/02 em 01/03 nos anos não bissextos (0.352713ms)
+  ✔ completa 29/02 no próprio dia nos anos bissextos (0.40807ms)
+  ✔ usa a data atual quando nenhuma referência é informada (0.466258ms)
+✔ calcularIdade (7.233336ms)
+▶ validarDataNascimento
+  ✔ rejeita data texto livre (0.982686ms)
+  ✔ rejeita data formato brasileiro (0.159241ms)
+  ✔ rejeita data sem zero à esquerda (0.19945ms)
+  ✔ rejeita data mês inexistente (0.151201ms)
+  ✔ rejeita data dia inexistente (0.133206ms)
+  ✔ rejeita data 29/02 em ano não bissexto (0.118981ms)
+  ✔ rejeita data vazia (0.107326ms)
+  ✔ rejeita data nula (0.159288ms)
+  ✔ rejeita data numérica (0.221926ms)
+  ✔ rejeita data no futuro (0.827864ms)
+  ✔ rejeita idade irreal (mais de 150 anos) (0.123968ms)
+  ✔ aceita data válida e devolve o mesmo texto (0.075283ms)
+✔ validarDataNascimento (5.167444ms)
+▶ mascararCpf (digitação progressiva)
+  ✔ "" -> "" (2.005748ms)
+  ✔ "5" -> "5" (0.178525ms)
+  ✔ "529" -> "529" (0.104369ms)
+  ✔ "5299" -> "529.9" (0.096489ms)
+  ✔ "529982" -> "529.982" (0.149346ms)
+  ✔ "5299822" -> "529.982.2" (0.128868ms)
+  ✔ "529982247" -> "529.982.247" (0.080599ms)
+  ✔ "5299822472" -> "529.982.247-2" (0.164822ms)
+  ✔ "52998224725" -> "529.982.247-25" (0.265786ms)
+  ✔ ignora letras e símbolos digitados (0.442683ms)
+  ✔ corta o que passar de 11 dígitos (0.123245ms)
+  ✔ reaplica a máscara sobre um valor já mascarado (0.092456ms)
+✔ mascararCpf (digitação progressiva) (5.428361ms)
+▶ dataParaBr
+  ✔ converte AAAA-MM-DD em DD/MM/AAAA (0.188752ms)
+  ✔ devolve o texto original quando o formato não é reconhecido (0.107197ms)
+✔ dataParaBr (0.45763ms)
+▶ textoIdade
+  ✔ usa singular para 1 ano (0.118126ms)
+  ✔ usa plural para 0 e para mais de 1 (0.072638ms)
+✔ textoIdade (0.272225ms)
+▶ RepositorioMemoria
+  ✔ começa vazio (1.467662ms)
+  ✔ salva e busca por CPF (1.458053ms)
+  ✔ devolve undefined quando o CPF não existe (0.233742ms)
+  ✔ lista em ordem alfabética de nome (8.017363ms)
+  ✔ salvar com o mesmo CPF substitui o registro (0.646697ms)
+  ✔ não expõe o objeto interno (alterar a cópia não afeta o repositório) (0.271468ms)
+  ✔ remove e informa se algo foi removido (0.233871ms)
+✔ RepositorioMemoria (13.589386ms)
+▶ ServicoPessoas
+  ▶ criar
+    ✔ cadastra e devolve a pessoa com a idade calculada (2.376396ms)
+    ✔ aceita CPF com máscara e guarda somente os dígitos (0.380835ms)
+    ✔ remove espaços extras do nome (0.303392ms)
+    ✔ rejeita CPF inválido (0.671562ms)
+    ✔ rejeita nome vazio, curto, longo ou que não seja texto (0.668956ms)
+    ✔ rejeita data de nascimento inválida ou futura (0.388537ms)
+    ✔ rejeita corpo ausente (0.244218ms)
+    ✔ rejeita CPF duplicado com ErroConflito (0.398131ms)
+  ✔ criar (8.094152ms)
+  ▶ listar e buscar
+    ✔ lista todas as pessoas ordenadas por nome, com idade (8.678158ms)
+    ✔ busca por CPF (com ou sem máscara) (0.433157ms)
+    ✔ lança ErroNaoEncontrado para CPF inexistente (0.45634ms)
+    ✔ lança ErroValidacao para CPF malformado na busca (0.216492ms)
+  ✔ listar e buscar (10.029879ms)
+  ▶ atualizar
+    ✔ altera nome e data de nascimento, recalculando a idade (0.652753ms)
+    ✔ permite alterar apenas um dos campos (0.245218ms)
+    ✔ não permite trocar o CPF (0.28063ms)
+    ✔ aceita o mesmo CPF (mesmo com máscara) no corpo (0.241377ms)
+    ✔ valida os novos dados e não altera o registro em caso de erro (0.31975ms)
+    ✔ lança ErroNaoEncontrado para CPF inexistente (0.188061ms)
+  ✔ atualizar (2.121905ms)
+  ▶ remover
+    ✔ exclui a pessoa cadastrada (1.096095ms)
+    ✔ lança ErroNaoEncontrado quando não existe (0.310286ms)
+  ✔ remover (1.514367ms)
+✔ ServicoPessoas (22.623267ms)
+ℹ tests 94
+ℹ suites 15
+ℹ pass 94
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 494.143294
+
