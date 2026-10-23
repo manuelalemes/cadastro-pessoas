@@ -1,0 +1,13 @@
+$ npm run test:unit -- 2>&1 | grep -E 'Cannot find|fail|tests' | head -6
+> node --test --test-reporter=spec "tests/unit/**/*.test.js"
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/claude/cadastro-pessoas/src/repositorio/repositorioMemoria.js' imported from /home/claude/cadastro-pessoas/tests/unit/repositorioMemoria.test.js
+✖ tests/unit/repositorioMemoria.test.js (44.064811ms)
+ℹ tests 52
+ℹ fail 1
+✖ failing tests:
+
+$ npm run test:unit -- 2>&1 | grep -E '^ℹ (tests|pass|fail)'
+ℹ tests 58
+ℹ pass 58
+ℹ fail 0
+
