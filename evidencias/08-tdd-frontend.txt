@@ -1,0 +1,13 @@
+$ npm run test:unit -- 2>&1 | grep -E 'does not provide|SyntaxError|fail|tests' | head -6
+> node --test --test-reporter=spec "tests/unit/**/*.test.js"
+file:///home/claude/cadastro-pessoas/tests/unit/mascara.test.js:3
+SyntaxError: The requested module '../../public/mascara.js' does not provide an export named 'dataParaBr'
+✖ tests/unit/mascara.test.js (55.362636ms)
+ℹ tests 79
+ℹ fail 1
+
+$ npm run test:unit -- 2>&1 | grep -E '^ℹ (tests|pass|fail)'
+ℹ tests 94
+ℹ pass 94
+ℹ fail 0
+
