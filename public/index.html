@@ -1,2 +1,91 @@
-<h1>Cadastro de Pessoas</h1>
-<form id="form-pessoa"></form>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Pessoas</title>
+    <link rel="stylesheet" href="/estilo.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <header class="topo">
+      <div class="conteudo">
+        <h1>Cadastro de Pessoas</h1>
+        <p>CPF, nome e data de nascimento, com idade calculada automaticamente.</p>
+      </div>
+    </header>
+
+    <main class="conteudo grade">
+      <section class="painel" aria-labelledby="titulo-form">
+        <h2 id="titulo-form">Nova pessoa</h2>
+
+        <form id="form-pessoa" novalidate>
+          <label for="cpf">CPF</label>
+          <input
+            id="cpf"
+            name="cpf"
+            type="text"
+            inputmode="numeric"
+            autocomplete="off"
+            placeholder="000.000.000-00"
+            maxlength="14"
+            required
+          />
+
+          <label for="nome">Nome completo</label>
+          <input
+            id="nome"
+            name="nome"
+            type="text"
+            autocomplete="off"
+            placeholder="Ex.: Maria da Silva"
+            maxlength="120"
+            required
+          />
+
+          <label for="dataNascimento">Data de nascimento</label>
+          <input id="dataNascimento" name="dataNascimento" type="date" required />
+
+          <p id="aviso" class="aviso" role="status" aria-live="polite" hidden></p>
+
+          <div class="botoes">
+            <button id="btn-salvar" type="submit" class="primario">Cadastrar</button>
+            <button id="btn-cancelar" type="button" class="neutro" hidden>
+              Cancelar edição
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="painel" aria-labelledby="titulo-lista">
+        <div class="cabecalho-lista">
+          <h2 id="titulo-lista">
+            Pessoas cadastradas <span id="contador" class="contador">0</span>
+          </h2>
+          <input
+            id="busca"
+            type="search"
+            placeholder="Buscar por nome ou CPF"
+            aria-label="Buscar"
+          />
+        </div>
+
+        <div class="tabela-rolavel">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Nascimento</th>
+                <th>Idade</th>
+                <th><span class="so-leitor">Ações</span></th>
+              </tr>
+            </thead>
+            <tbody id="corpo-tabela"></tbody>
+          </table>
+        </div>
+        <p id="vazio" class="vazio" hidden>Nenhuma pessoa encontrada.</p>
+      </section>
+    </main>
+  </body>
+</html>
