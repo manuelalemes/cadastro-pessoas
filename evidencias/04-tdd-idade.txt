@@ -1,0 +1,54 @@
+$ npm run test:unit -- 2>&1 | grep -E 'Cannot find|ERR_MODULE|fail|tests' | head -8
+> node --test --test-reporter=spec "tests/unit/**/*.test.js"
+    throw new ERR_MODULE_NOT_FOUND(
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/claude/cadastro-pessoas/src/dominio/idade.js' imported from /home/claude/cadastro-pessoas/tests/unit/idade.test.js
+  code: 'ERR_MODULE_NOT_FOUND',
+✖ tests/unit/idade.test.js (40.063765ms)
+ℹ tests 4
+ℹ fail 1
+✖ failing tests:
+
+$ npm run test:unit -- 2>&1 | tail -45
+
+> cadastro-pessoas@1.0.0 test:unit
+> node --test --test-reporter=spec "tests/unit/**/*.test.js"
+
+▶ erros de domínio
+  ✔ ErroValidacao carrega mensagem e status 400 (0.882953ms)
+  ✔ ErroNaoEncontrado usa status 404 (0.178032ms)
+  ✔ ErroConflito usa status 409 (0.253614ms)
+✔ erros de domínio (2.504316ms)
+▶ calcularIdade
+  ✔ conta anos completos quando o aniversário já passou no ano (1.740957ms)
+  ✔ desconta um ano quando o aniversário ainda não chegou (0.246755ms)
+  ✔ considera o próprio dia do aniversário como ano completo (0.335074ms)
+  ✔ considera o dia anterior ao aniversário como ano incompleto (0.301717ms)
+  ✔ retorna 0 para quem nasceu há menos de um ano (0.46041ms)
+  ✔ retorna 0 para quem nasceu hoje (0.205758ms)
+  ✔ completa 29/02 em 01/03 nos anos não bissextos (0.344526ms)
+  ✔ completa 29/02 no próprio dia nos anos bissextos (0.396395ms)
+  ✔ usa a data atual quando nenhuma referência é informada (0.497671ms)
+✔ calcularIdade (6.769768ms)
+▶ validarDataNascimento
+  ✔ rejeita data texto livre (1.132936ms)
+  ✔ rejeita data formato brasileiro (0.183317ms)
+  ✔ rejeita data sem zero à esquerda (0.170641ms)
+  ✔ rejeita data mês inexistente (0.140341ms)
+  ✔ rejeita data dia inexistente (0.131496ms)
+  ✔ rejeita data 29/02 em ano não bissexto (0.106146ms)
+  ✔ rejeita data vazia (0.169953ms)
+  ✔ rejeita data nula (0.173709ms)
+  ✔ rejeita data numérica (0.228524ms)
+  ✔ rejeita data no futuro (0.771077ms)
+  ✔ rejeita idade irreal (mais de 150 anos) (0.16916ms)
+  ✔ aceita data válida e devolve o mesmo texto (0.132905ms)
+✔ validarDataNascimento (6.306596ms)
+ℹ tests 24
+ℹ suites 3
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 173.656907
+
