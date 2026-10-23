@@ -1,0 +1,60 @@
+$ npm run test:integration -- 2>&1 | grep -E 'Cannot find|fail|tests' | head -6
+> node --test --test-reporter=spec "tests/integration/**/*.test.js"
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/claude/cadastro-pessoas/src/http/aplicacao.js' imported from /home/claude/cadastro-pessoas/tests/helpers/servidorDeTeste.js
+✖ tests/integration/frontend.estatico.test.js (50.705439ms)
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/claude/cadastro-pessoas/src/http/aplicacao.js' imported from /home/claude/cadastro-pessoas/tests/helpers/servidorDeTeste.js
+✖ tests/integration/pessoas.api.test.js (44.593045ms)
+ℹ tests 2
+
+$ npm run test:integration 2>&1 | grep -vE '^$' | tail -50
+  ✔ serve a página inicial em "/" (23.70638ms)
+  ✔ serve o CSS com o content-type correto (5.280795ms)
+  ✔ serve os módulos JavaScript do frontend (11.105077ms)
+  ✔ bloqueia tentativa de sair da pasta public (path traversal) (7.176307ms)
+  ✔ responde 404 para arquivo inexistente (3.454533ms)
+✔ Arquivos estáticos do frontend (integração) (61.077338ms)
+▶ API /pessoas (integração)
+  ✔ GET /saude responde ok (37.807235ms)
+  ▶ POST /pessoas
+    ✔ cria a pessoa e devolve 201 com a idade (18.415037ms)
+    ✔ informa a URL do novo recurso no cabeçalho Location (11.161705ms)
+    ✔ responde 400 para CPF inválido (9.613925ms)
+    ✔ responde 400 para data futura (7.060518ms)
+    ✔ responde 409 para CPF repetido (6.36857ms)
+    ✔ responde 400 para JSON malformado (5.407182ms)
+    ✔ responde 400 quando o corpo não é um objeto (4.144556ms)
+    ✔ responde 413 para corpo grande demais (10.783619ms)
+  ✔ POST /pessoas (74.491418ms)
+  ▶ GET /pessoas
+    ✔ lista vazia no início (10.828362ms)
+    ✔ lista as pessoas cadastradas em ordem de nome (16.046654ms)
+  ✔ GET /pessoas (27.274921ms)
+  ▶ GET /pessoas/:cpf
+    ✔ devolve a pessoa pelo CPF (10.108363ms)
+    ✔ responde 404 quando não existe (5.658257ms)
+    ✔ responde 400 para CPF malformado (3.824241ms)
+  ✔ GET /pessoas/:cpf (19.961562ms)
+  ▶ PUT /pessoas/:cpf
+    ✔ atualiza nome e data e recalcula a idade (7.757367ms)
+    ✔ persiste a alteração (11.800946ms)
+    ✔ responde 400 ao tentar trocar o CPF (9.99321ms)
+    ✔ responde 404 para pessoa inexistente (4.854431ms)
+  ✔ PUT /pessoas/:cpf (34.756442ms)
+  ▶ DELETE /pessoas/:cpf
+    ✔ remove e responde 204 sem corpo (5.342372ms)
+    ✔ responde 404 para pessoa inexistente (3.511264ms)
+  ✔ DELETE /pessoas/:cpf (9.045863ms)
+  ▶ roteamento
+    ✔ responde 404 em JSON para rotas desconhecidas (3.467761ms)
+    ✔ responde 405 para método não suportado em /pessoas (4.118416ms)
+  ✔ roteamento (7.839021ms)
+✔ API /pessoas (integração) (223.315106ms)
+ℹ tests 27
+ℹ suites 8
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 560.11626
+
